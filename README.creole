@@ -1,0 +1,7 @@
+== Scoreboards
+
+Scoreboards :D
+
+=== Compiling
+
+Maven 3 is required to compile Scoreboards

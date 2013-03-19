@@ -1,0 +1,4 @@
+name: Scoreboards
+main: com.drtshock.scoreboards
+version: ${project.version}
+author: drtshock
