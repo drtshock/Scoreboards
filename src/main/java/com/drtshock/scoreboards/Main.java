@@ -30,7 +30,7 @@ public class Main extends JavaPlugin {
 	}
 
 	public boolean onCommand(CommandSender sender, Command cmd, String label, String[] args) {
-		if(cmd.getName().equalsIgnoreCase("sc")) {
+		if(cmd.getName().equalsIgnoreCase("sb")) {
 			if(sender.hasPermission("scoreboard.admin")) {
 				if(args.length == 0) {
 					sender.sendMessage(ChatColor.AQUA + "================");
@@ -46,7 +46,7 @@ public class Main extends JavaPlugin {
 						return true;
 					}
 					if(args[0].equalsIgnoreCase("update")) {
-						getServer().getScheduler().runTask(plugin, run());
+						run();
 						sender.sendMessage(ChatColor.GREEN + "Updated scoreboards for all players!");
 						return true;
 					}
@@ -59,7 +59,7 @@ public class Main extends JavaPlugin {
 		return true;
 	}
 
-	public Runnable run() {
+	public void run() {
 		List<String> messages = getConfig().getStringList("messages");
 
 		Scoreboard sb = new Scoreboard();
@@ -79,7 +79,7 @@ public class Main extends JavaPlugin {
 				sendPacket(p, scoreItem);
 			}
 		}
-		return null;
+		return;
 	}
 
 	public void sendPacket(Player player, Packet packet) {

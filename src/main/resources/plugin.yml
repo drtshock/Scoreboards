@@ -1,4 +1,6 @@
 name: Scoreboards
-main: com.drtshock.scoreboards
+main: com.drtshock.scoreboards.Main
 version: ${project.version}
 author: drtshock
+commands:
+  sb:

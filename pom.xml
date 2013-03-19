@@ -10,7 +10,7 @@
         <url>https://github.com/drtshock/scoreboards/issues</url>
     </issueManagement>
     <build>
-        <finalName>TEMPLATE</finalName>
+        <finalName>Scoreboards</finalName>
         <sourceDirectory>${basedir}/src/main/java</sourceDirectory>
         <resources>
             <resource>
@@ -31,23 +31,6 @@
                     <source>1.6</source>
                     <target>1.6</target>
                 </configuration>
-            </plugin>
-            <plugin>
-                <artifactId>maven-assembly-plugin</artifactId>
-                <configuration>
-                    <descriptors>
-                        <descriptor>src/main/assembly/package.xml</descriptor>
-                    </descriptors>
-                </configuration>
-                <executions>
-                    <execution>
-                        <id>build</id>
-                        <phase>package</phase>
-                        <goals>
-                            <goal>single</goal>
-                        </goals>
-                    </execution>
-                </executions>
             </plugin>
         </plugins>
         <extensions>
@@ -78,7 +61,7 @@
     </dependencies>
     <distributionManagement>
         <repository>
-            <id>nuclearw-repo</id>
+            <id>drtshock-repo</id>
             <url>file:///var/lib/jenkins/repo</url>
         </repository>
     </distributionManagement>
