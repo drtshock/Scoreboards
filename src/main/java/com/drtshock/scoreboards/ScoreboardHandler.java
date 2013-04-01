@@ -15,15 +15,11 @@ import org.bukkit.entity.Player;
 public class ScoreboardHandler {
 
 	public enum StatType {
-		BREAK_BLOCK,
-		PlACE_BLOCK,
 		KILL,
 		DEATH;
 	}
 
 	Scoreboard sb;
-	ScoreboardScore placedBlocksScore;
-	ScoreboardScore breakBlocksScore;
 	ScoreboardScore killScore;
 	ScoreboardScore deathScore;
 
@@ -36,12 +32,6 @@ public class ScoreboardHandler {
 		sb = new Scoreboard();
 		sb.a("Stats", new ScoreboardBaseObjective("Stats"));
 		
-		placedBlocksScore = sb.a(ChatColor.GOLD + "Blocks Placed", sb.b("Stats"));
-		placedBlocksScore.c(0);
-		
-		breakBlocksScore = sb.a(ChatColor.GOLD + "Blocks Broken", sb.b("Stats"));
-		breakBlocksScore.c(0);
-		
 		killScore = sb.a(ChatColor.GREEN + "Kills", sb.b("Stats"));
 		killScore.c(0);
 		
@@ -51,15 +41,11 @@ public class ScoreboardHandler {
 		Packet206SetScoreboardObjective scoreboardP = new Packet206SetScoreboardObjective(sb.b("Stats"), 0);
 		Packet208SetScoreboardDisplayObjective displayP = new Packet208SetScoreboardDisplayObjective(1, sb.b("Stats"));
 		
-		Packet207SetScoreboardScore scoreItemBreak = new Packet207SetScoreboardScore(breakBlocksScore, 0);
-		Packet207SetScoreboardScore scoreItemPlace = new Packet207SetScoreboardScore(placedBlocksScore, 0);
 		Packet207SetScoreboardScore scoreKill = new Packet207SetScoreboardScore(killScore, 0);
 		Packet207SetScoreboardScore scoreDeath = new Packet207SetScoreboardScore(deathScore, 0);
 
 		player.playerConnection.sendPacket(scoreboardP);
 		player.playerConnection.sendPacket(displayP);
-		player.playerConnection.sendPacket(scoreItemBreak);
-		player.playerConnection.sendPacket(scoreItemPlace);
 		player.playerConnection.sendPacket(scoreKill);
 		player.playerConnection.sendPacket(scoreDeath);
 
@@ -67,23 +53,13 @@ public class ScoreboardHandler {
 
 	public void increment(StatType type) {
 		switch(type) {
-		case BREAK_BLOCK:
-			breakBlocksScore.c(breakBlocksScore.c() + 1);
-			Packet207SetScoreboardScore scoreItemBreak = new Packet207SetScoreboardScore(breakBlocksScore, 0);
-			player.playerConnection.sendPacket(scoreItemBreak);
-			break;
-		case PlACE_BLOCK:
-			placedBlocksScore.c(placedBlocksScore.c() + 1);
-			Packet207SetScoreboardScore scoreItemPlace = new Packet207SetScoreboardScore(placedBlocksScore, 0);
-			player.playerConnection.sendPacket(scoreItemPlace);
-			break;
 		case KILL:
-			killScore.c(placedBlocksScore.c() + 1);
+			killScore.c(killScore.c() + 1);
 			Packet207SetScoreboardScore scoreKill = new Packet207SetScoreboardScore(killScore, 0);
 			player.playerConnection.sendPacket(scoreKill);
 			break;
 		case DEATH:
-			deathScore.c(placedBlocksScore.c() + 1);
+			deathScore.c(deathScore.c() + 1);
 			Packet207SetScoreboardScore scoreDeath = new Packet207SetScoreboardScore(deathScore, 0);
 			player.playerConnection.sendPacket(scoreDeath);
 			break;

@@ -5,8 +5,6 @@ import java.util.HashMap;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
-import org.bukkit.event.block.BlockBreakEvent;
-import org.bukkit.event.block.BlockPlaceEvent;
 import org.bukkit.event.entity.PlayerDeathEvent;
 import org.bukkit.event.player.PlayerJoinEvent;
 import org.bukkit.event.player.PlayerQuitEvent;
@@ -25,20 +23,6 @@ public class Main extends JavaPlugin implements Listener {
 		Player p = event.getPlayer();
 		ScoreboardHandler handler = new ScoreboardHandler(this, p);
 		handlers.put(p, handler);
-	}
-
-	@EventHandler
-	public void onPlace(BlockPlaceEvent event) {
-		ScoreboardHandler sbh = handlers.get(event.getPlayer());
-		sbh.increment(ScoreboardHandler.StatType.PlACE_BLOCK);
-		handlers.put(event.getPlayer(), sbh);
-	}
-
-	@EventHandler
-	public void onBreak(BlockBreakEvent event) {
-		ScoreboardHandler sbh = handlers.get(event.getPlayer());
-		sbh.increment(ScoreboardHandler.StatType.BREAK_BLOCK);
-		handlers.put(event.getPlayer(), sbh);
 	}
 
 	@EventHandler
